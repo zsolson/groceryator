@@ -34,19 +34,22 @@ Groceryator::Application.configure do
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 
+  # Speed up tests by lowering bcrypt's cost function.
+  ActiveModel::SecurePassword.min_cost = true
+
   #required for mailers and devise
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.perform_deliveries = true
-  config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.smtp_settings = {
-    :enable_starttls_auto => true,  
-    :oppenssl_verify_mode => 'none',
-    :address            => 'smtp.gmail.com',
-    :port               => 587,
-    :domain             => 'gmail.com', #you can also use google.com
-    :authentication     => :plain,
-    :user_name          => ENV["EMAIL"],
-    :password           => ENV["PASSWORD"]
-  }
+  #config.action_mailer.delivery_method = :smtp
+  #config.action_mailer.perform_deliveries = true
+  #config.action_mailer.raise_delivery_errors = true
+  #config.action_mailer.smtp_settings = {
+  #  :enable_starttls_auto => true,  
+  #  :oppenssl_verify_mode => 'none',
+  #  :address            => 'smtp.gmail.com',
+  #  :port               => 587,
+  #  :domain             => 'gmail.com', #you can also use google.com
+  #  :authentication     => :plain,
+  #  :user_name          => ENV["EMAIL"],
+  #  :password           => ENV["PASSWORD"]
+  #}
 end
