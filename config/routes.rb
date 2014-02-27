@@ -1,4 +1,5 @@
 Groceryator::Application.routes.draw do
+  resources :grocery_lists
   devise_for :users
   root 'static_pages#home'
 

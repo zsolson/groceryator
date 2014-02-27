@@ -1,0 +1,6 @@
+<% if @grocery_lists.any? %>
+  <ol class="microposts">
+    <%= render partial: 'shared/grocery_list', collection: @grocery_lists, :as => :grocery_list %>
+  </ol>
+  <%= will_paginate @grocery_lists %>
+<% end %>

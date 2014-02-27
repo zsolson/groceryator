@@ -1,0 +1,6 @@
+<li id="<%= grocery_list.id %>">
+  <span class="content"><%= grocery_list.name %></span>
+  <span class="timestamp">
+    Created <%= time_ago_in_words(grocery_list.created_at) %> ago.
+  </span>
+</li>
