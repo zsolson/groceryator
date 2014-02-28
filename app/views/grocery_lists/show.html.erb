@@ -1,2 +1,14 @@
-<h1>GroceryLists#show</h1>
-<p>Find me in app/views/grocery_lists/show.html.erb</p>
+<% provide(:title, @grocery_list.name) %>
+<div class="row">
+  <aside class="span4">
+    <section>
+      <h1>
+        <%= gravatar_for @current_user %>
+        <%= @current_user.name %>
+      </h1>
+    </section>
+  </aside>
+</div>
+<div class="span12">
+    <h3><%= @grocery_list.name%></h3>
+  </div>

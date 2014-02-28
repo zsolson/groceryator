@@ -31,6 +31,7 @@ class GroceryListsController < ApplicationController
   end
 
   def show
+    @grocery_list = GroceryList.find(params[:id])
   end
 
   private 
