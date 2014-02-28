@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140228020414) do
+ActiveRecord::Schema.define(version: 20140228203514) do
+
+  create_table "grocery_list_items", force: true do |t|
+    t.integer  "grocery_list_id"
+    t.integer  "item_id"
+    t.boolean  "bought"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "grocery_list_items", ["grocery_list_id", "bought"], name: "index_grocery_list_items_on_grocery_list_id_and_bought"
 
   create_table "grocery_lists", force: true do |t|
     t.string   "name"
@@ -23,6 +33,14 @@ ActiveRecord::Schema.define(version: 20140228020414) do
   add_index "grocery_lists", ["created_at"], name: "index_grocery_lists_on_created_at"
   add_index "grocery_lists", ["name"], name: "index_grocery_lists_on_name", unique: true
   add_index "grocery_lists", ["user_id"], name: "index_grocery_lists_on_user_id"
+
+  create_table "items", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "items", ["name"], name: "index_items_on_name", unique: true
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

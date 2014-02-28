@@ -1,14 +1,15 @@
 <% provide(:title, @grocery_list.name) %>
-<div class="row">
-  <aside class="span4">
-    <section>
-      <h1>
-        <%= gravatar_for @current_user %>
-        <%= @current_user.name %>
-      </h1>
-    </section>
-  </aside>
-</div>
+<%= render 'shared/user_header' %>
 <div class="span12">
     <h3><%= @grocery_list.name%></h3>
-  </div>
+	<div style="float: right;">
+  		<%= link_to "Add Item", new_grocery_list_item_path(:grocery_list_id => @grocery_list.id), class: "btn btn-large btn-primary" %>
+	</div>
+	<div class="span12">
+    	<table>
+    		<%= render @grocery_list_items %>
+  		</table>
+  		<br />
+  		<%= will_paginate @grocery_list_items %>
+  	</div>
+</div>
