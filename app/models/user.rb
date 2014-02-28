@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   def next_grocery_list_name
   	count = todays_lists.count
   	if count != 0
-  		"My Grocery list #{Time.now.strftime("%m/%d/%Y")} (#{count})"
+  		"My Grocery list #{Time.now.strftime("%m/%d/%Y")} (#{count + 1})"
   	else
   		"My Grocery list #{Time.now.strftime("%m/%d/%Y")}"
   	end
