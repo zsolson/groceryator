@@ -3,10 +3,12 @@
   	<aside class="span4">
   		<section>
     		<%= render 'shared/user_info' %>
-        <%= link_to "Create a List!", new_grocery_list_path %>
   		</section>
   	</aside>
 	</div>
+  <div style="float: right;">
+    <%= link_to "Create a List!", new_grocery_list_path, class: "btn btn-large btn-primary" %>
+  </div>
   <div class="span12">
     <h3>My Lists</h3>
     <%= render 'shared/grocery_lists' %>
