@@ -165,8 +165,15 @@ aside {
   }
   strong {
     display: block;
+    color: $blue;
   }
 }
+
+
+  strong {
+    display: block;
+    color: $blue;
+  }
 
 .user_avatars {
   overflow: auto;
