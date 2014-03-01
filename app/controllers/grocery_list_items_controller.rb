@@ -32,29 +32,46 @@ class GroceryListItemsController < ApplicationController
   end
 
   def buy
-  	groceryList = GroceryList.find(params[:grocery_list_id])
-  	if groceryList.nil?
-  		redirect_to root_url
+  	get_grocery_list_item
+  	if @grocery_list_item.nil?
+  		return redirect_to @groceryList 
   	end
-  	@grocery_list_item = groceryList.grocery_list_items.find_by(id: params[:id])
-  	redirect_to groceryList if @grocery_list_item.nil?
   	@grocery_list_item.update_attribute(:bought, true)
-  	redirect_to groceryList
+  	redirect_to @groceryList
   end
 
-  def destroy
-  	groceryList = GroceryList.find(params[:grocery_list_id])
-  	if groceryList.nil?
-  		redirect_to root_url
+  def put_back
+  	get_grocery_list_item
+  	if @grocery_list_item.nil?
+  		return redirect_to @groceryList 
   	end
-  	@grocery_list_item = groceryList.grocery_list_items.find_by(id: params[:id])
-  	redirect_to groceryList if @grocery_list_item.nil?
+  	@grocery_list_item.update_attribute(:bought, false)
+  	redirect_to @groceryList
+  end
+
+
+  def destroy
+  	get_grocery_list_item
+  	if @grocery_list_item.nil?
+  		return redirect_to @groceryList 
+  	end
   	@grocery_list_item.destroy
-  	redirect_to groceryList
+  	redirect_to @groceryList
   end
 
 
   private
+
+  def get_grocery_list_item
+  	@groceryList = GroceryList.find(params[:grocery_list_id])
+  	if @groceryList.nil?
+  		return redirect_to root_url
+  	end
+  	@grocery_list_item = @groceryList.grocery_list_items.find_by(id: params[:id])
+  	if @grocery_list_item.nil?
+  		return redirect_to @groceryList 
+  	end
+  end
 
   def save_grocery_list_item
 	@grocery_list_item = GroceryListItem.new

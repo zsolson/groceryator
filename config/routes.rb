@@ -5,7 +5,8 @@ Groceryator::Application.routes.draw do
   resources :grocery_lists
   resources :grocery_list_items, only: [:new, :create, :destroy] do
     member do
-      get 'buy'
+      get 'buy' #these should be puts
+      get 'put_back'
     end
   end
   devise_for :users
