@@ -7,6 +7,9 @@
                                     data: { confirm: "You sure?" },
                                     title: grocery_list_item.item.name 
                                     %></td>
+    <td class="span1"><%= link_to "BUY", buy_grocery_list_item_path(
+    :id => grocery_list_item.id,
+    :grocery_list_id => grocery_list_item.grocery_list.id) %></td>
     <td><%= grocery_list_item.item.name %></td>
  </tr>
 <% end %>

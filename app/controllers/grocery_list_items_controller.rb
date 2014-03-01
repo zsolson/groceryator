@@ -31,6 +31,17 @@ class GroceryListItemsController < ApplicationController
   	end
   end
 
+  def buy
+  	groceryList = GroceryList.find(params[:grocery_list_id])
+  	if groceryList.nil?
+  		redirect_to root_url
+  	end
+  	@grocery_list_item = groceryList.grocery_list_items.find_by(id: params[:id])
+  	redirect_to groceryList if @grocery_list_item.nil?
+  	@grocery_list_item.update_attribute(:bought, true)
+  	redirect_to groceryList
+  end
+
   def destroy
   	groceryList = GroceryList.find(params[:grocery_list_id])
   	if groceryList.nil?

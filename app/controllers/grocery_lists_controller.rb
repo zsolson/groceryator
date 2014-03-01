@@ -32,7 +32,8 @@ class GroceryListsController < ApplicationController
 
   def show
     @grocery_list = GroceryList.find(params[:id])
-    @grocery_list_items = @grocery_list.grocery_list_items.paginate(page: params[:page])
+    @grocery_list_items = @grocery_list.grocery_list_items.where(:bought => false).paginate(page: params[:page])
+    @bought_grocery_list_items = @grocery_list.grocery_list_items.where(:bought => true).paginate(page: params[:page])
   end
 
   private 

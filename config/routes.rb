@@ -3,7 +3,11 @@ Groceryator::Application.routes.draw do
   get "grocery_list_items/create"
   get "grocery_list_items/destroy"
   resources :grocery_lists
-  resources :grocery_list_items, only: [:new, :create, :destroy]
+  resources :grocery_list_items, only: [:new, :create, :destroy] do
+    member do
+      get 'buy'
+    end
+  end
   devise_for :users
   root 'static_pages#home'
 
