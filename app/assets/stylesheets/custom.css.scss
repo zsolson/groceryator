@@ -62,6 +62,27 @@ p {
   line-height: 1.7em;
 }
 
+.groceryList {
+  display: block;
+  width: 100%;
+  padding: 0;
+    text-align: left;
+  tr {
+  display: block;
+  width: 100%;
+    padding: 0;
+    
+
+  }
+  td {
+  display: block;
+  width: 100%;
+    color: $blue;
+    text-align: left;
+    font-weight: bold;
+  }
+}
+
 
 /* header */
 
