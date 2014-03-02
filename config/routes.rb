@@ -5,6 +5,7 @@ Groceryator::Application.routes.draw do
   resources :grocery_lists do
     member do
       get 'complete'
+      get 'uncomplete'
     end
     collection do
       get 'completed_lists'

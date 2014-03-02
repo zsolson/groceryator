@@ -61,28 +61,11 @@ p {
   font-size: 1.1em;
   line-height: 1.7em;
 }
-
-.groceryList {
+  
+strong {
   display: block;
-  width: 100%;
-  padding: 0;
-    text-align: left;
-  tr {
-  display: block;
-  width: 100%;
-    padding: 0;
-    
-
-  }
-  td {
-  display: block;
-  width: 100%;
-    color: $blue;
-    text-align: left;
-    font-weight: bold;
-  }
+  color: $blue;
 }
-
 
 /* header */
 
@@ -99,6 +82,17 @@ p {
   &:hover {
     color: white;
     text-decoration: none;
+  }
+}
+
+.badge {
+  width: 95%;
+  height: 40px;
+  line-height: 40px;
+  font-size: 1.1em;
+  text-align: center;
+  a {
+    color: yellow;
   }
 }
 
@@ -189,12 +183,6 @@ aside {
     color: $blue;
   }
 }
-
-
-  strong {
-    display: block;
-    color: $blue;
-  }
 
 .user_avatars {
   overflow: auto;

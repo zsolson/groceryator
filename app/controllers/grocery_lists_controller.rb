@@ -27,6 +27,12 @@ class GroceryListsController < ApplicationController
     redirect_to root_url
   end
 
+  def uncomplete
+    @grocery_list = GroceryList.find(params[:id])
+    @grocery_list.update_attribute(:complete, false)
+    redirect_to @grocery_list
+  end
+
   def completed_lists
     @grocery_lists = current_user.grocery_lists.where(:complete => true).paginate(page: params[:page])
   end

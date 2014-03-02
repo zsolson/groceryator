@@ -1,16 +1,16 @@
 <%= div_for(grocery_list_item) do %>
 <tr>
-    <% if grocery_list_item.bought? %>
+    <% if !@grocery_list.complete? && grocery_list_item.bought? %>
     	<td class="span2"><%= link_to "Put back", put_back_grocery_list_item_path(:id => grocery_list_item.id,
  		   	:grocery_list_id => grocery_list_item.grocery_list.id) %>
  		   </td>
-    <% else %>
+    <% elsif !@grocery_list.complete? %>
     	<td class="span1"><%= link_to "BUY", buy_grocery_list_item_path(
     	:id => grocery_list_item.id,
     	:grocery_list_id => grocery_list_item.grocery_list.id) %></td>
     <% end %>
     <td><%= grocery_list_item.item.name %></td>
-    <% if !grocery_list_item.bought? %>
+    <% if !@grocery_list.complete? && !grocery_list_item.bought? %>
     <td class="span1"><%= link_to "remove", grocery_list_item_path(
 	:id => grocery_list_item.id,
 	:grocery_list_id => grocery_list_item.grocery_list.id), 

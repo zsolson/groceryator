@@ -5,6 +5,9 @@
 		<div style="float: right;">
   			<%= link_to "Add Item", new_grocery_list_item_path(:grocery_list_id => @grocery_list.id), class: "btn btn-large btn-primary" %>
 		</div>
+	<% else %>
+		<p class="badge badge-success">This is a completed list. Please 
+			<%= link_to "re-activate", uncomplete_grocery_list_path(@grocery_list) %> to edit</p>
 	<% end %>
     <h3><%= @grocery_list.name%></h3>
     <% if !@grocery_list_items.empty? %>
