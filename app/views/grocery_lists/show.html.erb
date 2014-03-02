@@ -28,13 +28,13 @@
   	<% if !@grocery_list.complete? && !@grocery_list_items.empty? %>
   		<!--If there are remaining non-bought items, force an ok on complete-->
 		<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#grocListCComplete">
-  			Complete
+  			Complete List
 		</button>
   	<% elsif !@grocery_list.complete? && @grocery_list_items.empty? && 
   		!@bought_grocery_list_items.empty? %>
   		<!--If only bought items remain, allow unconditional complete-->
   		<%= link_to "Complete List", complete_grocery_list_path(
-  			@grocery_list), class: "btn" %>
+  			@grocery_list), class: "btn btn-primary btn-lg" %>
   	<% end %>
 </div>
 <%= render 'dialogs/grocery_list_confirm_complete', :grocery_list => @grocery_list %>
