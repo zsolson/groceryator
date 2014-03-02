@@ -1,9 +1,11 @@
 <% provide(:title, @grocery_list.name) %>
 <%= render 'shared/user_header' %>
 <div class="span12">
-	<div style="float: right;">
-  		<%= link_to "Add Item", new_grocery_list_item_path(:grocery_list_id => @grocery_list.id), class: "btn btn-large btn-primary" %>
-	</div>
+	<% if !@grocery_list.complete? %>
+		<div style="float: right;">
+  			<%= link_to "Add Item", new_grocery_list_item_path(:grocery_list_id => @grocery_list.id), class: "btn btn-large btn-primary" %>
+		</div>
+	<% end %>
     <h3><%= @grocery_list.name%></h3>
     <% if !@grocery_list_items.empty? %>
   		<table class="table table-striped">
