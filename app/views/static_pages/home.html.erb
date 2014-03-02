@@ -6,12 +6,15 @@
   		</section>
   	</aside>
 	</div>
-  <div style="float: right;">
-    <%= link_to "Create a List!", new_grocery_list_path, class: "btn btn-large btn-primary" %>
-  </div>
   <div class="span12">
+    <div style="float: right;">
+      <%= link_to "Create a List!", new_grocery_list_path, class: "btn btn-large btn-primary" %>
+    </div>
     <h3>My Lists</h3>
     <%= render 'shared/grocery_lists' %>
+  </div>
+  <div class="span12">
+    <h6><%= link_to "View completed lists", completed_lists_grocery_lists_path, class: "btn" %>
   </div>
 <% else %>
   <div class="center hero-unit">

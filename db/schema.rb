@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140301204330) do
+ActiveRecord::Schema.define(version: 20140302161638) do
 
   create_table "grocery_list_items", force: true do |t|
     t.integer  "grocery_list_id"
@@ -28,8 +28,10 @@ ActiveRecord::Schema.define(version: 20140301204330) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "complete",   default: false
   end
 
+  add_index "grocery_lists", ["complete"], name: "index_grocery_lists_on_complete"
   add_index "grocery_lists", ["created_at"], name: "index_grocery_lists_on_created_at"
   add_index "grocery_lists", ["name"], name: "index_grocery_lists_on_name", unique: true
   add_index "grocery_lists", ["user_id"], name: "index_grocery_lists_on_user_id"

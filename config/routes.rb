@@ -2,7 +2,14 @@ Groceryator::Application.routes.draw do
   get "grocery_list_items/new"
   get "grocery_list_items/create"
   get "grocery_list_items/destroy"
-  resources :grocery_lists
+  resources :grocery_lists do
+    member do
+      get 'complete'
+    end
+    collection do
+      get 'completed_lists'
+    end
+  end
   resources :grocery_list_items, only: [:new, :create, :destroy] do
     member do
       get 'buy' #these should be puts

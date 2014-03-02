@@ -1,0 +1,18 @@
+<!-- Confirm Complete model dialog -->
+<div class="modal hide" id="grocListCComplete" tabindex="-1" role="dialog" aria-labelledby="grocListCCompleteLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="grocListCCompleteLabel">Are you sure?</h4>
+      </div>
+      <div class="modal-body">
+        There are still un-bought items on your list. Are you sure you want to complete the list?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <%= link_to "Complete", complete_grocery_list_path(grocery_list), class: "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+</div>

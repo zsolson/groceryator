@@ -1,0 +1,14 @@
+<div class="row">
+	<aside class="span4">
+		<section>
+  		<%= render 'shared/user_info' %>
+		</section>
+	</aside>
+</div>
+<div class="span12">
+  <h3>My Completed Lists</h3>
+  <%= render 'shared/grocery_lists' %>
+</div>
+<div class="span12">
+  <h6><%= link_to "View active lists", root_path, class: "btn" %>
+</div>

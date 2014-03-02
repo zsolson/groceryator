@@ -20,4 +20,19 @@
   		<br />
   		<%= will_paginate @bought_grocery_list_items %>
   	<% end %>
+  	<% if !@grocery_list_items.empty? %>
+  		<!--If there are remaining non-bought items, force an ok on complete-->
+  		<!--button class="btn" data-toggle="modal" data-target="#myModal">
+  			Complete
+		</button-->
+		<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#grocListCComplete">
+  			Complete
+		</button>
+  	<% elsif @grocery_list_items.empty? && 
+  		!@bought_grocery_list_items.empty? %>
+  		<!--If only bought items remain, allow unconditional complete-->
+  		<%= link_to "Complete List", complete_grocery_list_path(
+  			@grocery_list), class: "btn" %>
+  	<% end %>
 </div>
+<%= render 'dialogs/grocery_list_confirm_complete', :grocery_list => @grocery_list %>
