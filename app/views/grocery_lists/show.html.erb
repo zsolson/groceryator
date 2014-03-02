@@ -5,16 +5,19 @@
   		<%= link_to "Add Item", new_grocery_list_item_path(:grocery_list_id => @grocery_list.id), class: "btn btn-large btn-primary" %>
 	</div>
     <h3><%= @grocery_list.name%></h3>
-  	<table class="table table-striped">
-   		<%= render @grocery_list_items %>
-  	</table>
-  	<br />
-  	<%= will_paginate @grocery_list_items %>
-    <h5>Bought Items</h5>
-  	<table class="table table-striped">
-   		<%= render @bought_grocery_list_items %>
-  	</table>
-  	<br />
-  	<%= will_paginate @bought_grocery_list_items %>
-  	
+    <% if !@grocery_list_items.empty? %>
+  		<table class="table table-striped">
+   			<%= render @grocery_list_items %>
+  		</table>
+  		<br />
+  		<%= will_paginate @grocery_list_items %>
+  	<% end %>
+  	<% if !@bought_grocery_list_items.empty? %>
+    	<h5>Bought Items</h5>
+  		<table class="table table-striped">
+   			<%= render @bought_grocery_list_items %>
+  		</table>
+  		<br />
+  		<%= will_paginate @bought_grocery_list_items %>
+  	<% end %>
 </div>
