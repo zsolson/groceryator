@@ -3,5 +3,8 @@
   <%= current_user.name %>
 </h1>
 <span>
-  <%= pluralize(current_user.grocery_lists.count, "list") %>
+  <%= pluralize(current_user.grocery_lists.where(:complete => false).count, "Active List") %>
+</span>
+<span>
+  <%= pluralize(current_user.grocery_lists.where(:complete => true).count, "Completed List") %>
 </span>
