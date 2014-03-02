@@ -6,4 +6,12 @@ class GroceryList < ActiveRecord::Base
 	default_scope -> { order('created_at DESC') }
 	validates :name, presence: true, length: { maximum: 50 }, uniqueness: { case_sensitive: false }
 	validates :user_id, presence: true
+
+	def unbought_grocery_list_items
+		grocery_list_items.where(:bought => false)
+	end
+
+	def bought_grocery_list_items
+		grocery_list_items.where(:bought => true)
+	end
 end

@@ -1,4 +1,6 @@
 <li id="<%= grocery_list.id %>">
+  <span class="details"><%= pluralize(grocery_list.bought_grocery_list_items.count, "Item") %> bought</span>
+  <span class="details"><%= pluralize(grocery_list.unbought_grocery_list_items.count, "Item") %> to be bought</span>
   <span class="content"><%= link_to "#{grocery_list.name}", grocery_list_path(grocery_list) %></span>
   <span class="timestamp">
     Created <%= time_ago_in_words(grocery_list.created_at) %> ago.
