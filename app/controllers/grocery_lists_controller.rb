@@ -34,7 +34,7 @@ class GroceryListsController < ApplicationController
   end
 
   def completed_lists
-    @grocery_lists = current_user.grocery_lists.where(:complete => true).paginate(page: params[:page])
+    @grocery_lists = current_user.completed_grocery_lists.paginate(page: params[:page])
   end
 
   def update

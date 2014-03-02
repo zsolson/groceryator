@@ -12,9 +12,9 @@
     </div>
     <h3>My Lists</h3>
     <%= render 'shared/grocery_lists' %>
-  </div>
-  <div class="span12">
-    <h6><%= link_to "View completed lists", completed_lists_grocery_lists_path, class: "btn" %>
+    <% if !current_user.completed_grocery_lists.empty? %>
+      <h6><%= link_to "View completed lists", completed_lists_grocery_lists_path, class: "btn" %>
+    <% end %>
   </div>
 <% else %>
   <div class="center hero-unit">

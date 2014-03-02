@@ -9,12 +9,20 @@ class User < ActiveRecord::Base
   	grocery_lists.where("created_at >= ?", Time.zone.now.beginning_of_day)
   end
 
+  def active_grocery_lists
+	grocery_lists.where(:complete => false)
+  end
+
+  def completed_grocery_lists
+  	grocery_lists.where(:complete => true)
+  end
+
   def next_grocery_list_name
   	count = todays_lists.count
   	if count != 0
-  		"My Grocery list #{Time.now.strftime("%m/%d/%Y")} (#{count + 1})"
+  		"My Grocery List #{Time.now.strftime("%m/%d/%Y")} (#{count + 1})"
   	else
-  		"My Grocery list #{Time.now.strftime("%m/%d/%Y")}"
+  		"My Grocery List #{Time.now.strftime("%m/%d/%Y")}"
   	end
   end
 end
