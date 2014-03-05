@@ -4,6 +4,8 @@ class Ability
   def initialize(user)
     user ||= User.new #user is not logged in
     can :manage, GroceryList, :user_id => user.id
+
+    can :manage, GroceryListItem, user.grocery_list_ids.include?(:grocery_list_id)
     # Define abilities for the passed in user here. For example:
     #
     #   user ||= User.new # guest user (not logged in)

@@ -1,21 +1,18 @@
 <%= div_for(grocery_list_item) do %>
 <tr>
     <% if !@grocery_list.complete? && grocery_list_item.bought? %>
-    	<td class="span2"><%= link_to "Put back", put_back_grocery_list_item_path(:id => grocery_list_item.id,
- 		   	:grocery_list_id => grocery_list_item.grocery_list.id),
+    	<td class="span2"><%= link_to "Put back", put_back_grocery_list_grocery_list_item_path(@grocery_list, grocery_list_item),
  		   	class: "btn btn-small btn-info btn-block" %>
  		   </td>
     <% elsif !@grocery_list.complete? %>
-    	<td class="span2"><%= link_to "BUY", buy_grocery_list_item_path(
-    	:id => grocery_list_item.id,
-    	:grocery_list_id => grocery_list_item.grocery_list.id),
+    	<td class="span2"><%= link_to "BUY", buy_grocery_list_grocery_list_item_path(@grocery_list, grocery_list_item.id),
  		   	class: "btn btn-small btn-success btn-block" %></td>
     <% end %>
     <td><%= grocery_list_item.item.name %></td>
     <% if !@grocery_list.complete? && !grocery_list_item.bought? %>
     <td class="span1">
     	<span class="glyphicon glyphicon-minus-sign"></span>
-    	<%= link_to grocery_list_item_path(:id => grocery_list_item.id, :grocery_list_id => grocery_list_item.grocery_list.id), 
+    	<%= link_to [@grocery_list, grocery_list_item], 
 									:class => "btn btn-default btn-small", :method => :delete, :confirm => "Are you sure?" do %>
                                      <img alt="Rails" src="/assets/remove.png" height="16" width="16" />
                                      <% end %></td>

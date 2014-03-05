@@ -3,21 +3,11 @@
 
 <div class="row">
 	<div class="span6 offset3">
-		<%= form_for @groceryListItem do |form| %>
+		<%= form_for ([@groceryList, @groceryListItem]) do |form| %>
  			<%= form.fields_for :item do |f| %>
    				<%= f.text_field :name %>
  			<% end %>
-   			<%= hidden_field_tag "grocery_list_id", @groceryListItem.grocery_list.id %>
 			<%= form.submit %>
 		<% end %>
 	</div>
 </div>
-
-<% if false %>
-<%= form_for @groceryListItem do |form| %>
- <%= form.fields_for :item do |f| %>
-   <%= f.text_field :name %>
- <% end %>
-<%= form.submit %>
-<% end %>
-<% end %>

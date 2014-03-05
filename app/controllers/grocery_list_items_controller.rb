@@ -1,19 +1,27 @@
 class GroceryListItemsController < ApplicationController
+  before_filter do
+    resource = controller_name.singularize.to_sym
+    method = "#{resource}_params"
+    params[resource] &&= send(method) if respond_to?(method, true)
+  end
+
+  before_filter :load_grocery_list
+  before_filter :preset_grocery_list_item, :only => :create
+
+  load_and_authorize_resource :grocery_list
+  load_and_authorize_resource :through => :grocery_list
+  skip_authorize_resource :grocery_list, :only => :create
+  skip_authorize_resource :only => :create
+  
+
+
   def new
-  	groceryList = GroceryList.find(params[:grocery_list_id])
-  	if groceryList.nil?
-  		redirect_to root_url
-  	end
-  	@groceryListItem = groceryList.grocery_list_items.build
+  	@groceryListItem = @groceryList.grocery_list_items.build
   	@groceryListItem.build_item
   end
 
   def create
-  	grocery_list_items_params
-  	@groceryList = GroceryList.find(params[:grocery_list_id])
-  	if @groceryList.nil?
-  		redirect_to root_url
-  	end
+  	#grocery_list_item_params
   	@existingItem = Item.find_by(name: params[:grocery_list_item][:item][:name])
   	if @existingItem.nil?
   		#item does not exist, create it
@@ -32,29 +40,20 @@ class GroceryListItemsController < ApplicationController
   end
 
   def buy
-  	get_grocery_list_item
-  	if @grocery_list_item.nil?
-  		return redirect_to @groceryList 
-  	end
+  	@grocery_list_item = @groceryList.grocery_list_items.find(params[:id])
   	@grocery_list_item.update_attribute(:bought, true)
   	redirect_to @groceryList
   end
 
   def put_back
-  	get_grocery_list_item
-  	if @grocery_list_item.nil?
-  		return redirect_to @groceryList 
-  	end
+  	@grocery_list_item = @groceryList.grocery_list_items.find(params[:id])
   	@grocery_list_item.update_attribute(:bought, false)
   	redirect_to @groceryList
   end
 
 
   def destroy
-  	get_grocery_list_item
-  	if @grocery_list_item.nil?
-  		return redirect_to @groceryList 
-  	end
+  	@grocery_list_item = @groceryList.grocery_list_items.find(params[:id])
   	@grocery_list_item.destroy
   	redirect_to @groceryList
   end
@@ -76,6 +75,7 @@ class GroceryListItemsController < ApplicationController
   def save_grocery_list_item
 	@grocery_list_item = GroceryListItem.new
 	@grocery_list_item.grocery_list = @groceryList
+	@grocery_list_item = @groceryList.grocery_list_items.new
 	@grocery_list_item.item = @existingItem
   	if @grocery_list_item.save
   		#grocery_list_item successfully saved
@@ -87,8 +87,16 @@ class GroceryListItemsController < ApplicationController
   	end
   end
 
-  def grocery_list_items_params
-  	params.require(:grocery_list_id)
-    params.permit(:grocery_list_item => [ :item => [:name]])
+  def preset_grocery_list_item
+  	@grocery_list_item = @groceryList.grocery_list_items.new
+  end
+  
+  def grocery_list_item_params
+  	params.require(:grocery_list_item).permit!
+    #params.permit(:grocery_list_item => [ :item => [:name]])
+  end
+
+  def load_grocery_list
+  	@groceryList = GroceryList.find(params[:grocery_list_id])
   end
 end

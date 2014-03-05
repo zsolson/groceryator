@@ -10,13 +10,19 @@ Groceryator::Application.routes.draw do
     collection do
       get 'completed_lists'
     end
-  end
-  resources :grocery_list_items, only: [:new, :create, :destroy] do
-    member do
-      get 'buy' #these should be puts
-      get 'put_back'
+    resources :grocery_list_items do
+      member do
+        get 'buy'
+        get 'put_back'
+      end
     end
   end
+  #resources :grocery_list_items, only: [:new, :create, :destroy] do
+  #  member do
+  #    get 'buy' #these should be puts
+  #    get 'put_back'
+  #  end
+  #end
   devise_for :users
   root 'static_pages#home'
 
