@@ -4,6 +4,11 @@
 <% else %>
 <div class="modal" id="grocListItemPriceEntry" tabindex="-1" role="dialog" aria-labelledby="grocListItemPriceEntryLabel" aria-hidden="true">
 <% end %>
+<%= javascript_tag do %>
+$('#grocListItemPriceEntry').on('shown.bs.modal', function () {
+    $('#grocery_list_item_price').focus();
+})
+<% end %>
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -30,7 +35,7 @@
           <% end %>
       
           <%= f.label :price %>
-          <%= f.text_field :price, :value => number_with_precision(0, :precision => 2) %>
+          <%= f.text_field :price, :value => '', :autofocus => true, :placeholder => '0.00' %>
         </div>
         <div class="modal-footer">
           <% if hide == "HIDE" %>

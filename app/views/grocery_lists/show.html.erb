@@ -24,6 +24,11 @@
     	<h5>Bought Items</h5>
   		<table class="table table-striped">
    			<%= render @bought_grocery_list_items %>
+   			<tfoot>
+   				<td></td>
+   				<td><div class='text-center'>Total:</div></td>
+   				<td class="span2"><%= @grocery_list.bought_item_price_total %></td>
+   			</tfoot>
   		</table>
   		<br />
   		<%= will_paginate @bought_grocery_list_items %>

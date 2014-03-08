@@ -14,4 +14,13 @@ class GroceryList < ActiveRecord::Base
 	def bought_grocery_list_items
 		grocery_list_items.where(:bought => true)
 	end
+
+	def bought_item_price_total
+		bought_items =  bought_grocery_list_items
+		total = 0.0
+		bought_items.each do |item|
+			total += item.price
+		end
+		return total
+	end
 end
