@@ -12,7 +12,7 @@ Groceryator::Application.routes.draw do
     end
     resources :grocery_list_items do
       member do
-        get 'buy'
+        patch 'buy'
         get 'put_back'
       end
     end

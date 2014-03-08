@@ -41,7 +41,8 @@ class GroceryListItemsController < ApplicationController
 
   def buy
   	@grocery_list_item = @groceryList.grocery_list_items.find(params[:id])
-  	@grocery_list_item.update_attribute(:bought, true)
+  	@grocery_list_item.update_attributes(:bought => true, :price => params[:grocery_list_item][:price])
+  	@show_style = ""
   	redirect_to @groceryList
   end
 
@@ -90,7 +91,7 @@ class GroceryListItemsController < ApplicationController
   def preset_grocery_list_item
   	@grocery_list_item = @groceryList.grocery_list_items.new
   end
-  
+
   def grocery_list_item_params
   	params.require(:grocery_list_item).permit!
     #params.permit(:grocery_list_item => [ :item => [:name]])

@@ -11,14 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140302161638) do
+ActiveRecord::Schema.define(version: 20140305050858) do
 
   create_table "grocery_list_items", force: true do |t|
     t.integer  "grocery_list_id"
     t.integer  "item_id"
-    t.boolean  "bought",          default: false
+    t.boolean  "bought",                                  default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.decimal  "price",           precision: 6, scale: 2, default: 0.0
   end
 
   add_index "grocery_list_items", ["grocery_list_id", "bought"], name: "index_grocery_list_items_on_grocery_list_id_and_bought"
@@ -43,6 +44,19 @@ ActiveRecord::Schema.define(version: 20140302161638) do
   end
 
   add_index "items", ["name"], name: "index_items_on_name", unique: true
+
+  create_table "prices", force: true do |t|
+    t.string   "item_id"
+    t.decimal  "avg",        precision: 6, scale: 2, default: 0.0
+    t.decimal  "max",        precision: 6, scale: 2, default: 0.0
+    t.decimal  "min",        precision: 6, scale: 2, default: 0.0
+    t.decimal  "total",      precision: 6, scale: 2, default: 0.0
+    t.integer  "count",                              default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "prices", ["item_id"], name: "index_prices_on_item_id", unique: true
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

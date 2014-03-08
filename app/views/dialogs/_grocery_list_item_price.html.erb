@@ -1,0 +1,22 @@
+<!-- Grocery List Item Price Entry modal dialog -->
+<div class="modal hide" id="grocListItemPriceEntry" tabindex="-1" role="dialog" aria-labelledby="grocListItemPriceEntryLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="grocListItemPriceEntryLabel">What price did you pay?</h4>
+      </div>
+      <%= form_for([grocery_list, grocery_list_item], :url => buy_grocery_list_grocery_list_item_path(grocery_list, grocery_list_item.id)) do |f| %>
+        <div class="modal-body">
+          <%= render 'shared/error_messages', object: f.object %>
+      
+          <%= f.label :price %>
+          <%= f.text_field :price %>
+        </div>
+        <div class="modal-footer">
+          <%= f.submit "Buy!", class: "btn btn-large btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
