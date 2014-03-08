@@ -22,11 +22,11 @@
                                      <% end %></td>
     <% elsif !@grocery_list.complete? %>
     	<td class="span2">
-    		Price: <%= grocery_list_item.price %>
+    		<%= number_to_currency(grocery_list_item.price) %>
     	</td>
     <% end %>
  </tr>
 <% if @grocery_list.grocery_list_items.first == grocery_list_item %>
-<%= render 'dialogs/grocery_list_item_price', :grocery_list => @grocery_list, :grocery_list_item => grocery_list_item %>
+<%= render 'dialogs/grocery_list_item_price', :grocery_list => @grocery_list, :grocery_list_item => grocery_list_item, :form_errors => grocery_list_item.errors, :hide => "HIDE" %>
 <% end %>
 <% end %>

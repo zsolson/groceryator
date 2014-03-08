@@ -47,6 +47,11 @@ class GroceryListsController < ApplicationController
   end
 
   def show
+    if !flash[:form_errors].nil?
+      @form_errors = flash[:form_errors]
+      @original_grocery_list_item = flash[:original_grocery_list_item]
+    end
+
     @grocery_list = GroceryList.find(params[:id])
     @grocery_list_items = @grocery_list.grocery_list_items.where(:bought => false).paginate(page: params[:page])
     @bought_grocery_list_items = @grocery_list.grocery_list_items.where(:bought => true).paginate(page: params[:page])

@@ -1,19 +1,43 @@
 <!-- Grocery List Item Price Entry modal dialog -->
+<% if hide == "HIDE" %>
 <div class="modal hide" id="grocListItemPriceEntry" tabindex="-1" role="dialog" aria-labelledby="grocListItemPriceEntryLabel" aria-hidden="true">
+<% else %>
+<div class="modal" id="grocListItemPriceEntry" tabindex="-1" role="dialog" aria-labelledby="grocListItemPriceEntryLabel" aria-hidden="true">
+<% end %>
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <% if hide == "HIDE" %>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <% else %>
+          <%= link_to '&times;'.html_safe, @grocery_list , :class => "close" %>
+        <% end %>
         <h4 class="modal-title" id="grocListItemPriceEntryLabel">What price did you pay?</h4>
       </div>
       <%= form_for([grocery_list, grocery_list_item], :url => buy_grocery_list_grocery_list_item_path(grocery_list, grocery_list_item.id)) do |f| %>
         <div class="modal-body">
-          <%= render 'shared/error_messages', object: f.object %>
+          <% if form_errors.any? %>
+            <div id="error_explanation">
+              <div class="alert alert-error">
+                The form contains <%= pluralize(form_errors.count, "error") %>.
+              </div>
+              <ul>
+                <% form_errors.each do |msg| %>
+                  <li>* <%= msg %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
       
           <%= f.label :price %>
-          <%= f.text_field :price %>
+          <%= f.text_field :price, :value => number_with_precision(0, :precision => 2) %>
         </div>
         <div class="modal-footer">
+          <% if hide == "HIDE" %>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <% else %>
+            <%= link_to "Cancel", @grocery_list , :class => "btn btn-default" %>
+          <% end %>
           <%= f.submit "Buy!", class: "btn btn-large btn-primary" %>
         </div>
       <% end %>

@@ -18,6 +18,9 @@
   		<%= will_paginate @grocery_list_items %>
   	<% end %>
   	<% if !@bought_grocery_list_items.empty? %>
+    	<div style="float: right;" >
+    		<h5><span class="span2">Price</span><h5>
+    	</div>
     	<h5>Bought Items</h5>
   		<table class="table table-striped">
    			<%= render @bought_grocery_list_items %>
@@ -38,3 +41,6 @@
   	<% end %>
 </div>
 <%= render 'dialogs/grocery_list_confirm_complete', :grocery_list => @grocery_list %>
+<% if !flash[:original_grocery_list_item].nil? %>
+	<%= render 'dialogs/grocery_list_item_price', :grocery_list => @grocery_list, :grocery_list_item => flash[:original_grocery_list_item], :form_errors => flash[:form_errors], :hide => "DO_NOT_HIDE" %>
+<% end %>

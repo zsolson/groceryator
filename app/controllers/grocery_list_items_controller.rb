@@ -41,9 +41,13 @@ class GroceryListItemsController < ApplicationController
 
   def buy
   	@grocery_list_item = @groceryList.grocery_list_items.find(params[:id])
-  	@grocery_list_item.update_attributes(:bought => true, :price => params[:grocery_list_item][:price])
-  	@show_style = ""
-  	redirect_to @groceryList
+  	if @grocery_list_item.update_attributes(:bought => true, :price => params[:grocery_list_item][:price])
+	  	redirect_to @groceryList
+	else
+		flash[:form_errors] = @grocery_list_item.errors.full_messages
+		flash[:original_grocery_list_item] = @grocery_list_item
+		redirect_to @groceryList
+	end
   end
 
   def put_back
