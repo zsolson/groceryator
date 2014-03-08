@@ -20,7 +20,10 @@
 									:class => "btn btn-default btn-small", :method => :delete, :confirm => "Are you sure?" do %>
                                      <img alt="Rails" src="/assets/remove.png" height="16" width="16" />
                                      <% end %></td>
-    <% elsif !@grocery_list.complete? %>
+    <% else %>
+    	<% if @grocery_list.complete? %>
+    		<td></td>
+    	<% end %>
     	<td class="span2">
     		<%= number_to_currency(grocery_list_item.price) %>
     	</td>
