@@ -16,6 +16,18 @@
   		</table>
   		<br />
   		<%= will_paginate @grocery_list_items %>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for ([@grocery_list, GroceryListItem.new]) do |form| %>
+      <%= form.fields_for :item do |f| %>
+          <%= f.text_field :name, :autofocus => true %>
+      <% end %>
+      <%= form.submit %>
+    <% end %>
+  </div>
+</div>
+
   	<% end %>
   	<% if !@bought_grocery_list_items.empty? %>
     	<div style="float: right;" >
