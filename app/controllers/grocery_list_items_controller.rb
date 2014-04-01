@@ -43,6 +43,10 @@ class GroceryListItemsController < ApplicationController
   	@grocery_list_item = @groceryList.grocery_list_items.find(params[:id])
   	if @grocery_list_item.update_attributes(:bought => true, :price => params[:grocery_list_item][:price])
 	  	redirect_to @groceryList
+	  	if @grocery_list_item.item.price.nil?
+	  		@grocery_list_item.item.build_price
+	  	end
+	  	@grocery_list_item.item.price.update(@grocery_list_item.price)
 	else
 		flash[:form_errors] = @grocery_list_item.errors.full_messages
 		flash[:original_grocery_list_item] = @grocery_list_item
@@ -53,6 +57,12 @@ class GroceryListItemsController < ApplicationController
   def put_back
   	@grocery_list_item = @groceryList.grocery_list_items.find(params[:id])
   	@grocery_list_item.update_attribute(:bought, false)
+  	if @grocery_list_item.item.price.nil?
+  		@grocery_list_item.item.build_price
+  	else
+  		@grocery_list_item.item.price.un_update(@grocery_list_item.price)
+  	end
+  	@grocery_list_item.price = 0.0
   	redirect_to @groceryList
   end
 
