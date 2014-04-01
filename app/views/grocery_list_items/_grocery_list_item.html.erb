@@ -7,7 +7,7 @@
     <% elsif !@grocery_list.complete? %>
     	<td class="span2">
     		<button class="btn btn-small btn-success btn-block" 
- 		   	data-toggle="modal" data-target="#grocListItemPriceEntry">
+ 		   	data-toggle="modal" data-target=<%="#grocery_list_buy" + grocery_list_item.id.to_s%>>
   			BUY
 			</button>
  		</td>
@@ -29,5 +29,5 @@
     	</td>
     <% end %>
  </tr>
-<%= render 'dialogs/grocery_list_item_price', :grocery_list => @grocery_list, :grocery_list_item => grocery_list_item, :form_errors => grocery_list_item.errors, :hide => "HIDE" %>
+<%= render 'dialogs/grocery_list_item_price', :modal_name => "grocery_list_buy" + grocery_list_item.id.to_s, :grocery_list => @grocery_list, :grocery_list_item => grocery_list_item, :form_errors => grocery_list_item.errors, :hide => "HIDE" %>
 <% end %>
